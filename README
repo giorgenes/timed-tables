@@ -1,7 +1,7 @@
 == Using timed-tables with rails
 
 class TimedTable < ActiveSupport::Base
-	url = "http://url-for-timed-tables"
+	self.site = "http://url-for-timed-tables"
 end
 
 tt = TimedTable.create(:columns => 3)
