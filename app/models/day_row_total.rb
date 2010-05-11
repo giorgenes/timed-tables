@@ -140,5 +140,10 @@ class DayRowTotal < ActiveRecord::Base
 	def validate
 		errors.add_on_empty %w(timed_table_id jday row_id)
 	end
+
+	def before_save
+		write_attribute(:cols, @cols)
+		@cols = nil
+	end
 end
 
