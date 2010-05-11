@@ -17,7 +17,7 @@ class TimedTablesController < ApplicationController
 
 	def update_rows
 		@timed_table = TimedTable.find(params[:id])
-		@timed_table.update_rows(params[:rows])
+		@timed_table.update_rows(params[:jday], params[:rows])
 
 		respond_to do |format|
 			format.xml { head :ok }
