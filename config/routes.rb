@@ -1,7 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
   # The priority is based upon order of creation: first created -> highest priority.
 
-	map.resources :timed_tables, :member => { :create_row => :post }
+	map.resources :timed_tables, 
+		:member => { :update_rows => :post, :at => :get }
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action

@@ -15,13 +15,23 @@ class TimedTablesController < ApplicationController
 		end
 	end
 
-	def create_row
+	def update_rows
 		@timed_table = TimedTable.find(params[:id])
-		@timed_table.create_row(params[:rowid])
+		@timed_table.update_rows(params[:rows])
 
 		respond_to do |format|
 			format.xml { head :ok }
 		end
+	end
+
+	def at
+		@timed_table = TimedTable.find(params[:id])
+		table = @timed_table.at(params[:jday])
+		
+		respond_to do |format|
+			format.xml { render :xml => table }
+		end
+
 	end
 end
 
