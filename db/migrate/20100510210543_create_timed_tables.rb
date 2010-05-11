@@ -1,8 +1,7 @@
 class CreateTimedTables < ActiveRecord::Migration
   def self.up
     create_table :timed_tables do |t|
-      t.string :rows
-
+      t.integer :ncols
       t.timestamps
     end
   end
