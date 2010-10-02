@@ -1,3 +1,4 @@
+module TimedTables
 class TimedTablesController < ApplicationController
 	def create
 		@timed_table = TimedTable.create(params[:timed_table])
@@ -43,4 +44,4 @@ class TimedTablesController < ApplicationController
 		end
 	end
 end
-
+end

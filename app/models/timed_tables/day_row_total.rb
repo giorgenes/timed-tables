@@ -1,5 +1,6 @@
 require 'matrix'
 
+module TimedTables
 # Stores the total of an Account in a given day.
 class DayRowTotal < ActiveRecord::Base
 	belongs_to :timed_table
@@ -137,13 +138,12 @@ class DayRowTotal < ActiveRecord::Base
 
 	protected
 
-	def validate
-		errors.add_on_empty %w(timed_table_id jday row_id)
-	end
-
-	def before_save
+	validates_presence_of %w(timed_table_id jday row_id)
+	
+	before_save :write_through
+	def write_through
 		write_attribute(:cols, @cols)
 		@cols = nil
 	end
 end
-
+end

@@ -1,10 +1,20 @@
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+begin
+	require "jeweler"
+	Jeweler::Tasks.new do |gem|
+		gem.name = "timed_tables"
+		gem.summary = "Rails engine"
+		gem.files = Dir["{lib}/**/*", 
+			"{app}/**/*", 
+			"{config}/**/*" 
+		]
+		gem.version = '1.0.0'
+		gem.author = 'Giorgenes'
+		gem.email = 'giorgenes@gmail.com'
+		gem.description = ''
+		gem.homepage = 'http://redmine.vshouse.org'
+		gem.rubyforge_project = 'none'
+	end
+rescue
+	puts "Jeweler or one of its dependencies is not installed."
+end
 
-require(File.join(File.dirname(__FILE__), 'config', 'boot'))
-
-require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
-
-require 'tasks/rails'

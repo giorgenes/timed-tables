@@ -1,3 +1,4 @@
+module TimedTables
 class TimedTable < ActiveRecord::Base
 	validates_presence_of :ncols
 
@@ -26,4 +27,6 @@ class TimedTable < ActiveRecord::Base
 	def clean(rowid)
 		AccountTotal.delete_all("row_id = #{rowid}")
 	end
+end
+
 end
