@@ -3,7 +3,8 @@ begin
 	Jeweler::Tasks.new do |gem|
 		gem.name = "timed_tables"
 		gem.summary = "Rails engine"
-		gem.files = Dir["{lib}/**/*", 
+		gem.files = Dir[
+			"{lib}/**/*",
 			"{app}/**/*", 
 			"{config}/**/*" 
 		]
