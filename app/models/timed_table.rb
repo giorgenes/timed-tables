@@ -18,4 +18,12 @@ class TimedTable < ActiveRecord::Base
 
 		result
 	end
+
+	def row_interval(rowid, b, e)
+		DayRowTotal.find_between(b, e, rowid, self).collect { |d| d.cols.to_a }
+	end
+
+	def clean(rowid)
+		AccountTotal.delete_all("row_id = #{rowid}")
+	end
 end

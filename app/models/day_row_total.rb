@@ -61,8 +61,8 @@ class DayRowTotal < ActiveRecord::Base
 					[
 					"row_id = ? " + 
 					"and jday >= ? " + "
-					and jday < ?", 
-						acc_id, s, e],
+					and jday < ? and timed_table_id = ?", 
+						acc_id, s, e, timeline.id],
 				:order => "jday")
 	end
 

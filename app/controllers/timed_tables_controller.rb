@@ -31,7 +31,16 @@ class TimedTablesController < ApplicationController
 		respond_to do |format|
 			format.xml { render :xml => table }
 		end
+	end
 
+	def row_interval
+		@timed_table = TimedTable.find(params[:id])
+		rows = @timed_table.row_interval(params[:rowid], 
+			params[:begin], params[:end])
+
+		respond_to do |format|
+			format.xml { render :xml => rows }
+		end
 	end
 end
 
