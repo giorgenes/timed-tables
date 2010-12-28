@@ -9,25 +9,21 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Giorgenes"]
-  s.date = %q{2010-10-02}
+  s.date = %q{2010-12-26}
   s.description = %q{}
   s.email = %q{giorgenes@gmail.com}
   s.extra_rdoc_files = [
     "README"
   ]
   s.files = [
-    "app/controllers/application_controller.rb",
-     "app/controllers/timed_tables_controller.rb",
-     "app/helpers/application_helper.rb",
-     "app/helpers/timed_tables_helper.rb",
-     "app/models/day_row_total.rb",
-     "app/models/timed_table.rb",
+    "app/controllers/timed_tables/timed_tables_controller.rb",
+     "app/models/timed_tables/day_row_total.rb",
+     "app/models/timed_tables/timed_table.rb",
      "config/routes.rb",
      "lib/engine.rb",
-     "lib/rails/generators/timed_tables/cheese_generator.rb",
-     "lib/rails/generators/timed_tables/templates/initializer.rb",
-     "lib/rails/generators/timed_tables/templates/migration.rb",
-     "lib/rails/generators/timed_tables/templates/schema.rb",
+     "lib/rails/generators/timed_tables/templates/db/migrate/20100510210543_create_timed_tables.rb",
+     "lib/rails/generators/timed_tables/templates/db/migrate/20100510233541_create_day_row_totals.rb",
+     "lib/rails/generators/timed_tables/timed_tables_generator.rb",
      "lib/rails/railties/tasks.rake",
      "lib/timed_tables.rb"
   ]

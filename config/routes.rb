@@ -1,4 +1,4 @@
-Rails.application.routes.draw do |map|
+Rails.application.routes.draw do
 	resources :timed_tables, :controller => "timed_tables/timed_tables" do 
 		member do
 			post :update_rows
