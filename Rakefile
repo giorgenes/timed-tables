@@ -8,7 +8,7 @@ begin
 			"{app}/**/*", 
 			"{config}/**/*" 
 		]
-		gem.version = '1.0.0'
+		gem.version = '1.0.1'
 		gem.author = 'Giorgenes'
 		gem.email = 'giorgenes@gmail.com'
 		gem.description = ''
