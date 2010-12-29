@@ -43,7 +43,7 @@ class DayRowTotal < ActiveRecord::Base
 		at = DayRowTotal.find(:first,
 			:conditions => ["row_id = ? and jday <= ? and jday > 0 and timed_table_id = ?", 
 			row_id, jd, timed_table_id],
-			:group => "row_id",
+			:group => "row_id, id, timed_table_id, jday, cols, created_at, updated_at",
 			:select => "*, max(jday)")
 		if at.nil? then
 			at = DayRowTotal.new(:row_id => row_id, :timed_table_id => timed_table_id, :jday => jd)
