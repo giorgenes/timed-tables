@@ -5,6 +5,8 @@ module TimedTables
 class DayRowTotal < ActiveRecord::Base
 	belongs_to :timed_table
 	serialize :cols, Vector
+	validates_presence_of %w(timed_table_id jday row_id)
+	before_save :write_through
 
 	def cols
 		return @cols unless @cols.nil?
@@ -138,9 +140,6 @@ class DayRowTotal < ActiveRecord::Base
 
 	protected
 
-	validates_presence_of %w(timed_table_id jday row_id)
-	
-	before_save :write_through
 	def write_through
 		write_attribute(:cols, @cols)
 		@cols = nil
