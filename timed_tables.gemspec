@@ -33,14 +33,11 @@ Gem::Specification.new do |s|
   s.rubyforge_project = %q{none}
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Rails engine}
-  s.test_files = [
-    "test/functional/timed_tables_controller_test.rb",
-     "test/performance/browsing_test.rb",
-     "test/test_helper.rb",
-     "test/unit/day_row_total_test.rb",
-     "test/unit/helpers/timed_tables_helper_test.rb",
-     "test/unit/timed_table_test.rb"
-  ]
+  s.add_dependency "rails"         , "~> 3.2.13"
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'factory_girl_rails'
+  s.add_development_dependency 'mysql2'
+  s.test_files = Dir["spec/**/*"]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
