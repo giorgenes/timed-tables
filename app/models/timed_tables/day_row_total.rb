@@ -1,22 +1,20 @@
-require 'matrix'
-
 module TimedTables
   # Stores the total of an Account in a given day.
   class DayRowTotal < ActiveRecord::Base
     belongs_to :timed_table
-    serialize :cols, Vector
+    serialize :cols, Array
     validates_presence_of %w(timed_table_id jday row_id)
-    before_save :write_through
+    #before_save :write_through
+    attr_accessible :row_id, :timed_table_id, :jday
+    #def cols
+      #return @cols unless @cols.nil?
+      #@cols = read_attribute(:cols)
+    #end
 
-    def cols
-      return @cols unless @cols.nil?
-      @cols = read_attribute(:cols)
-    end
-
-    def cols=(c)
-      @cols = c
-      write_attribute(:cols, @cols)
-    end
+    #def cols=(c)
+      #@cols = c
+      #write_attribute(:cols, @cols)
+    #end
 
     # Find all DayRowTotal's of a timeline in a given jd
     # If there is no DayRowTotal in that day but in an older day,
@@ -128,12 +126,14 @@ module TimedTables
     # mod can be > 0 (to add the record) or < 0 (to remove the record)
     def self.update_row(timed_table, jday, row)
       rowid = row[0]
-      row = Vector.elements(row[1, row.size])
+      row = row[1, row.size]
       DayRowTotal.new_and_each_since(jday, rowid, timed_table.id) do |ac|
-        if ac.cols.nil? then
-          ac.cols = Vector.elements(Array.new(timed_table.ncols, 0)) 
+        if ac.cols.nil? or ac.cols.empty?
+          ac.cols = Array.new(timed_table.ncols, 0)
         end
-        ac.cols += row
+        ac.cols.each_with_index do |e, index|
+          ac.cols[index] += row[index]
+        end
         ac.save
       end
     end

@@ -11,6 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20100510233541) do
+
+  create_table "day_row_totals", :force => true do |t|
+    t.integer  "timed_table_id"
+    t.integer  "row_id"
+    t.integer  "jday"
+    t.string   "cols"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "timed_tables", :force => true do |t|
+    t.integer  "ncols"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

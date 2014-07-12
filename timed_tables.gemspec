@@ -21,8 +21,8 @@ Gem::Specification.new do |s|
      "app/models/timed_tables/timed_table.rb",
      "config/routes.rb",
      "lib/engine.rb",
-     "lib/rails/generators/timed_tables/templates/db/migrate/20100510210543_create_timed_tables.rb",
-     "lib/rails/generators/timed_tables/templates/db/migrate/20100510233541_create_day_row_totals.rb",
+     "db/migrate/20100510210543_create_timed_tables.rb",
+     "db/migrate/20100510233541_create_day_row_totals.rb",
      "lib/rails/generators/timed_tables/timed_tables_generator.rb",
      "lib/rails/railties/tasks.rake",
      "lib/timed_tables.rb"

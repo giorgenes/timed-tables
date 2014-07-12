@@ -1,6 +1,8 @@
 module TimedTables
   class TimedTable < ActiveRecord::Base
+
     validates_presence_of :ncols
+    attr_accessible :ncols
 
     def update_rows(jday, rows)
       rows.each do |row|
@@ -21,7 +23,7 @@ module TimedTables
     end
 
     def row_interval(rowid, b, e)
-      DayRowTotal.find_between(b, e, rowid, self).collect do |d| 
+      DayRowTotal.find_between(b, e, rowid, self).map do |d| 
         [d.jday, d.cols.to_a]
       end
     end
