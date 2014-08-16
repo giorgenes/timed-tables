@@ -4,17 +4,7 @@ module TimedTables
     belongs_to :timed_table
     serialize :cols, Array
     validates_presence_of %w(timed_table_id jday row_id)
-    #before_save :write_through
     attr_accessible :row_id, :timed_table_id, :jday
-    #def cols
-      #return @cols unless @cols.nil?
-      #@cols = read_attribute(:cols)
-    #end
-
-    #def cols=(c)
-      #@cols = c
-      #write_attribute(:cols, @cols)
-    #end
 
     # Find all DayRowTotal's of a timeline in a given jd
     # If there is no DayRowTotal in that day but in an older day,
@@ -48,7 +38,7 @@ module TimedTables
       end
 
       if at.jday != jd
-        at = at.clone
+        at = at.dup
         at.jday = jd
       end
 
@@ -65,33 +55,6 @@ module TimedTables
             and jday < ? and timed_table_id = ?", 
               acc_id, s, e, timeline.id],
           :order => "jday")
-    end
-
-    # copies an older record
-    def copy_older(other)
-      self.zero
-
-      self.debit = other.debit
-      self.credit = other.credit
-
-      self
-    end
-
-    def self.new_zero(acc, total)
-      acc_id = acc.instance_of?(Account) ? acc.id : acc
-      at = DayRowTotal.new(
-        :total => total, 
-        :row_id => acc_id,
-        :timed_table_id => total.timed_table_id,
-        :jday => total.jday)
-      at.zero
-    end
-
-    def zero
-      self.debit = 0;
-      self.credit = 0;
-      
-      return self
     end
 
     # Finds all DayRowTotal's with row_id and jd >= jday
@@ -138,11 +101,5 @@ module TimedTables
       end
     end
 
-    protected
-
-    def write_through
-      write_attribute(:cols, @cols)
-      @cols = nil
-    end
   end
 end
