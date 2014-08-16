@@ -3,8 +3,8 @@ require 'spec_helper'
 include TimedTables
 
 describe DayRowTotal do
-  describe ".update_row" do
-    it "what?" do
+  describe ".new_and_each_since" do
+    it "returns a new object on a posterior date" do
       tt = TimedTable.create(:ncols => 2)
       tt.update_rows(2456876, [[7, 15, 0], [57, 0, 15]])
 
@@ -13,7 +13,8 @@ describe DayRowTotal do
         acs << ac
       end
 
-      acs.should eq([])
+      acs.size.should == 1
+      acs.first.new_record?.should be_true
     end
   end
 

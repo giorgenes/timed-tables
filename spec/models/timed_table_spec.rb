@@ -27,6 +27,18 @@ describe TimedTable do
     rows = tt.row_interval(7, 2456876, 2456878)
 
     rows.should eq([[2456876, [15, 0]], [2456877, [15, 15]]])
+  end
 
+
+  it "bug" do
+		tt = TimedTable.create(:ncols => 2)
+
+    TimedTables::DayRowTotal.update_row(tt, 2456876, [7, 150, 0])
+    TimedTables::DayRowTotal.update_row(tt, 2456877, [7, 0, 100])
+    TimedTables::DayRowTotal.update_row(tt, 2456882, [7, 0, 200])
+
+    dwt = TimedTables::DayRowTotal.where(row_id: 7, timed_table_id: tt.id, jday: 2456882).first
+
+    dwt.cols.should == [150, 300]
   end
 end

@@ -25,14 +25,17 @@ module TimedTables
       end
     end
 
+    def self.most_recent_previous_total(row_id, timed_table_id, jd)
+      scope = DayRowTotal.where(row_id: row_id, timed_table_id: timed_table_id)
+      if max = scope.where("jday <= ?", jd).maximum(:jday)
+        scope.where(jday: max).first
+      end
+    end
+
     # Finds an DayRowTotal by (Account, Timeline, jd).
     # If there is none, an older one is cloned and the jday is updated.
     def self.new_or_find_by_jd_and_account(row_id, timed_table_id, jd)
-      at = DayRowTotal.find(:first,
-        :conditions => ["row_id = ? and jday <= ? and jday > 0 and timed_table_id = ?", 
-        row_id, jd, timed_table_id],
-        :group => "row_id, id, timed_table_id, jday, cols, created_at, updated_at",
-        :select => "*, max(jday)")
+      at = most_recent_previous_total(row_id, timed_table_id, jd)
       if at.nil? then
         at = DayRowTotal.new(:row_id => row_id, :timed_table_id => timed_table_id, :jday => jd)
       end
