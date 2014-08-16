@@ -11,6 +11,8 @@ module TimedTables
         end
         DayRowTotal.update_row(self, jday, row)
       end
+
+      rows
     end
 
     def at(jday)
