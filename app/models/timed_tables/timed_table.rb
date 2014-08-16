@@ -24,6 +24,12 @@ module TimedTables
       result
     end
 
+    def row_at(jday, row_id)
+      if row = DayRowTotal.most_recent_previous_total(row_id, id, jday)
+        row.cols
+      end
+    end
+
     def row_interval(rowid, b, e)
       DayRowTotal.find_between(b, e, rowid, self).map do |d| 
         [d.jday, d.cols.to_a]
