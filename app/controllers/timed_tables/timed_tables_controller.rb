@@ -1,3 +1,5 @@
+require 'application_controller'
+
 module TimedTables
 class TimedTablesController < ApplicationController
 	def create
